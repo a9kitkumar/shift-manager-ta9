@@ -3,6 +3,14 @@
   background: #6b52f8
 }
 
+.input-field input[type=text] {
+	border-radius: 5px;
+  }
+
+  .input-field input[type=password] {
+    border-radius: 5px;
+    }
+
 .input-field input[type=text]:focus + label {
   color: none;
 }

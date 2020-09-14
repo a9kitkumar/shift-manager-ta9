@@ -1,9 +1,9 @@
-.signform {
+ .signform {
 	text-transform: capitalize;
-	padding: 10%;
+	padding: 10% 20% 10% 0%;
 }
 
-.second {
+/* .second {
 	text-transform: capitalize;
 	padding: 7%;
 	color: white !important;
@@ -20,4 +20,97 @@
 
 li {
 	list-style: none;
+} */
+
+/* ======================= */
+
+.input-field input[type=text]:focus + label {
+	color: none;
+  }
+  
+  .input-field input[type=text]:focus {
+	border-bottom: none;
+	box-shadow: none;
+  }
+  
+  .input-field input[type=text].valid {
+	border-bottom: none;
+	box-shadow: none;
+  }
+  
+  .input-field input[type=text].invalid {
+	border-bottom: none;
+	box-shadow: none;
+  }
+  /* icon prefix focus color */
+  .input-field input[type=text] {
+	border-radius: 2px;
+  }
+  .input-field input[type=password]:focus + label {
+	color: none;
+  }
+  
+  .input-field input[type=password]:focus {
+	border-bottom: none;
+	box-shadow: none;
+  }
+  
+  .input-field input[type=password].valid {
+	border-bottom: none;
+	box-shadow: none;
+  }
+  
+  .input-field input[type=password].invalid {
+	border-bottom: none;
+	box-shadow: none;
+  }
+  
+  .input-field input[type=text] {     
+	  background-color: white;
+	  color: black
+	}
+  
+	.input-field input[type=password] {     
+	  background-color: white;
+	  color: black
+	}
+
+	.label-class {
+		margin-top: -4px;
+	}
+
+	.required:after {
+		content:" *";
+		color: red;
+	  }
+
+	  .shift-label {
+		margin-top: -35px;
+		font-size: 12px;
+   }
+
+   select {
+	color: black;
+   }
+
+   select:disabled {
+	color: #dddddd;
+  }
+
+  .set-margin {
+	margin-bottom: -16px;
+  }
+
+  .button-next {
+	background: #6b52f8;
+	border-radius: 19px;
+  }
+
+  .next-button{
+	font-size: 2.4rem;
+    /* line-height: inherit; */
+    border-radius: 40px;
+    /* padding-top: 0px; */
+    margin: 1px -15px 0px 12px;
+    background-color: #a696f8;
 }

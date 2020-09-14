@@ -1,24 +1,28 @@
 <section>
     <div class="container signform">
-
-
+        
         <div class="row">
+            <div class="col s12 m6">
             <div style="margin-left: 10px; color: #fff; ">
-                <h4>Hello, Joe</h4>
+                <h2>Hello, Joe</h2>
                 <p>Plan a shift by filling in the following details:</p>
-                <p style="font-size:13px;">shift sector</p>
-
-            </div>
-            <div class="input-field col s12 m6">
-
+            </div> 
+        </div>
+        <div class="col s12 m6 right-align">
+            <button class="btn waves-effect waves-light button-next" type="submit" name="action"><i class="material-icons right next-button">forward</i>Next</button>
+        </div>
+        </div>
+            <div class="row">
+            <div class="input-field col s12 m4">     
+                <label class="required shift-label">Shift sector</label>           
                 <select class="browser-default">
-                    <option value="" disabled selected>Choose divison</option>
+                    <option value="" selected disabled>Choose divison</option>
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                     <option value="3">Option 3</option>
                 </select>
             </div>
-            <div class="input-field col s12 m6">
+            <div class="input-field col s12 m4">
 
                 <select class="browser-default">
                     <option value="" disabled selected>Choose NPC</option>
@@ -28,32 +32,39 @@
                 </select>
 
             </div>
+        </div>
+        <div class="row">
             <div class="input-field col s12 m4">
-                <label>Team Name</label>
+                <label class="label-class required">Team Name</label>
                 <input type="text" name="Name" placeholder="Team Name" autocomplete="on" required>
 
             </div>
             <div class="input-field col s12 m4">
-                <label>Driver Name</label>
+                <label class="label-class required">Driver Name</label>
                 <input type="text" name="Name" placeholder="Driver Name" autocomplete="on" required>
             </div>
             <div class="input-field col s12 m4">
-                <label>Petrolman</label>
+                <label class="label-class required">Patrolman</label>
                 <input type="text" name="Name" placeholder="Petrolman" autocomplete="on" required>
             </div>
-            <div class="input-field col s12 m6">
-                <label>sector</label>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m4">
+                <label class="label-class required">Sector</label>
                 <input type="text" name="Name" placeholder="sector" required>
             </div>
-            <div class="input-field col s12 m6">
-                <label>call sign</label>
+            <div class="input-field col s12 m4">
+                <label class="label-class required">Call sign</label>
                 <input type="text" name="Name" placeholder="call sign" required>
             </div>
-
-            <label>shift time</label>
-            <div class="shift">
+        </div>
+        <div class="row">
+            <label class="label-class required col s12 m12 set-margin">Shift time</label>
+            <div class="input-field col s12 m4">
+            
+            <!-- <div class="shift"> -->
                 <form action="#">
-                    <p>
+                    <!-- <p> -->
                         <label>
                             <input name="group1" type="radio" class="with-gap" checked />
                             <span>Day Shift</span>
@@ -62,9 +73,10 @@
                             <input name="group1" type="radio" class="with-gap" />
                             <span>Night Shift</span>
                         </label>
-                    </p>
+                    <!-- </p> -->
                     </form>
-            </div>
+            <!-- </div> / -->
+        </div>
         </div>
     </div>
 </section>
