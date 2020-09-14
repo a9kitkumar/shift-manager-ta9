@@ -1,0 +1,23 @@
+.signform {
+	text-transform: capitalize;
+	padding: 10%;
+}
+
+.second {
+	text-transform: capitalize;
+	padding: 7%;
+	color: white !important;
+}
+
+.browser-default {
+	color: black;
+}
+
+.summery {
+	text-transform: capitalize;
+	padding: 3%;
+}
+
+li {
+	list-style: none;
+}

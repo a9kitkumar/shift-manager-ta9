@@ -1,0 +1,16 @@
+.margin {
+    margin-top: 20px;
+}
+
+.button-background {
+    background: #6b52f8
+}
+
+.input-field input[type=text]:focus + label {
+    color: #6b52f8;
+  }
+
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #6b52f8;
+    box-shadow: 0 1px 0 0 #6b52f8;
+  }
