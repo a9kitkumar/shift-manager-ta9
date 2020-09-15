@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="stepOne">
     <div class="container signform">
         
         <div class="row">
@@ -9,7 +9,7 @@
             </div> 
         </div>
         <div class="col s12 m6 right-align">
-            <button class="btn waves-effect waves-light button-next" type="submit" name="action"><i class="material-icons right next-button">forward</i>Next</button>
+            <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="nextButton('1')"><i class="material-icons right next-button">forward</i>Next</button>
         </div>
         </div>
             <div class="row">
@@ -63,7 +63,7 @@
             <div class="input-field col s12 m4">
             
             <!-- <div class="shift"> -->
-                <form action="#">
+                <form>
                     <!-- <p> -->
                         <label>
                             <input name="group1" type="radio" class="with-gap" checked />
@@ -80,3 +80,166 @@
         </div>
     </div>
 </section>
+
+<!-- ===========================================Second slide================================ -->
+
+<section *ngIf="stepTwo">
+
+    <div class="second">
+
+        <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="backButton('2')"><i class="material-icons right next-button">arrow_back</i></button>
+        <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="nextButton('2')"><i class="material-icons right next-button">forward</i>Next</button>
+
+        <div style="margin-left: 10px; "> 
+        <h4>Hello, Joe</h4>
+         <p>Plan a shift by filling in the following Detail:</p>
+        
+
+        </div>
+        <div>
+            <table class="responsive-table highlight">
+       <thead>
+         <tr>
+             <th>SR.No.</th>
+             <th>Time</th>
+             <th>Location</th>
+              <th>Specific Purpose</th>
+             <th>Reason For Deviation</th>
+         </tr>
+       </thead>
+
+       <tbody>
+         <tr>
+           <td>1</td>
+           <td>10:22</td>
+           <td>Gurugram</td>
+           <td>
+              <div class="input-field col s12 m6" >
+                 <select class="browser-default">
+                   <option value="" disabled selected>Choose divison</option>
+                   <option value="1">Option 1</option>
+                   <option value="2">Option 2</option>
+                   <option value="3">Option 3</option>
+                   <option value="4">Option 4</option>
+                   <option value="5">Other.......</option>
+                 </select>
+               </div>
+           </td>
+           <td>
+              <div class="input-field col s12 m2">
+                <textarea style="font-size: 14px; padding: 3px; background-color:rgba(255,255,255,0.9); color: black;">type some reason.........</textarea>
+              </div>
+             
+
+           </td>
+         </tr>
+         <tr>
+           <td>2</td>
+           <td>06:22</td>
+           <td>Rohtak</td>
+           <td>
+              <div class="input-field col s12 m6" >
+                 <select class="browser-default">
+                   <option value="" disabled selected>Choose divison</option>
+                   <option value="1">Option 1</option>
+                   <option value="2">Option 2</option>
+                   <option value="3">Option 3</option>
+                   <option value="4">Option 4</option>
+                   <option value="5">Other.......</option>
+                 </select>
+               </div>
+           </td>
+           <td>
+              <div class="input-field col s12 m2">
+                <textarea style="font-size: 14px; padding: 3px; background-color:rgba(255,255,255,0.9); color: black;">type some reason.........</textarea>
+              </div>
+             
+
+           </td>
+         </tr>
+          
+         
+         
+       </tbody>
+     </table>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="addDetails()"><i class="material-icons  next-button">add</i></button>   
+
+</section>
+
+<!-- =================================Third Slide============================ -->
+
+<section *ngIf="stepThree">
+    <div class="second">
+     
+        <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="backButton('3')"><i class="material-icons right next-button">arrow_back</i></button>
+        <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="nextButton('3')"><i class="material-icons right next-button">check</i>Finish</button>
+
+
+      <div style="margin-left: 10px; padding-left:4%; "> 
+      <h4>Hello,John Deo</h4>
+       <p>plan a shift by filling in the following Detail:</p>
+      
+
+      </div>
+      <div class="row summery">
+
+        <div class="col s12 m3">
+          <img src="logo.png" width="200" >
+        </div>
+        <div class="col s12 m3">
+          <h6>Shift Summery</h6>
+          <li><label>Divison</label><span></span></li>
+          <li><label>NPC</label><span></span></li>
+          <li><label>Team</label><span></span></li>
+          <li><label>Driver</label><span></span></li>
+          <li><label>Petrolman</label><span></span></li>
+          <li><label>Call Sign</label><span></span></li>
+          <li><label>Sector</label><span></span></li>
+
+        </div>
+        <div class="col s12 m3">
+           <h6>Schedule</h6>
+           <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+            <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+            <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+            <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+            <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+            <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+            <li>
+             <label>08:12 - 09:12</label><span></span>
+           </li>
+        </div>
+        <div>
+        <div class="col s12 m3 input-field">
+           <h6>Other Signature</h6>
+           <!-- <span><img src="sign.png" width="100"></span><br> -->
+
+           <label>Full Name</label>
+           <input type="text" name="name" placeholder="Name" autocomplete="off"><br>
+           
+           <label>Rank</label>
+           <select class="browser-default">
+             <option value="" disabled selected>Rank</option>
+             <option value="1">Option 1</option>
+             <option value="2">Option 2</option>
+             <option value="3">Option 3</option>
+           </select>
+        </div>
+        </div>
+      </div>
+    </div>    
+  </section>
