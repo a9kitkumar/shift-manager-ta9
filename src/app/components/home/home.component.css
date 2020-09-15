@@ -48,6 +48,10 @@
  .bg-purple{
   background-color: #7375f8;
  }
+ .cursorPointer
+ {
+   cursor:pointer;
+ }
 .ownAddImg
 {
   max-width: 45px;

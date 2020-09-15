@@ -136,8 +136,8 @@
         </div>
       </div>
       <div class="col s12 m6 right-align">
-        <span>
-          <svg (click)="backButton('2')" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+        <span class="mr-3">
+          <svg (click)="backButton('2')" clas="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
             <defs>
               <style>
                 .a {
@@ -261,6 +261,48 @@
               </div>
             </td>
           </tr>
+          <tr>
+            <td>
+              <span class="deleteicon">
+                <span>
+                  <img class="ownDelete" src="../../../assets/img/trash.svg">
+                </span>
+                <span>
+                  2
+                </span>
+              </span>
+            </td>
+            <td>
+              <span class="startTime">10:22</span>
+              <span class="endTime">10:22</span>
+            </td>
+            <td>
+              <span class="location">
+                <span class="bg-purple">
+                  <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
+                </span>
+                <span class="bg-purple">Pick</span>
+              </span>
+            </td>
+            <td>
+              <div class="input-field col s12 m6 pl-0">
+                <select class="browser-default">
+                  <option value="" disabled selected>Choose divison</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                  <option value="4">Option 4</option>
+                  <option value="5">Other.......</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="input-field col s12 m2 pl-0">
+                <textarea class="ownTextArea">Type Here</textarea>
+              </div>
+            </td>
+          </tr>
+          
         </tbody>
       </table>
       <!-- </div> -->
