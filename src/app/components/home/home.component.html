@@ -54,10 +54,16 @@
           (click)="nextButton('1')"><i class="material-icons right next-button">forward</i>Next</button> -->
       </div>
     </div>
+      <div class="header">
+        <span class="indicator active"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+    </div>
+    
     <div class="pl-0">
       <div class="col-md-9">
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
             <label class="label-class required ownHeading">Shift’s Sector</label>
             <select class="browser-default">
               <option value="" selected disabled>Choose divison</option>
@@ -66,8 +72,8 @@
               <option value="3">Option 3</option>
             </select>
           </div>
-          <div class="form-group col-md-4">
-            <label style="visibility: hidden;">Shift sector</label>
+          <div class="form-group col-md-4 pr-1">
+            <label style="visibility: hidden;" class="label-class required ownHeading"></label>
             <select class="browser-default">
               <option value="" disabled selected>Choose NPC</option>
               <option value="1">Option 1</option>
@@ -77,32 +83,32 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
             <label class="label-class required ownHeading">Team Name</label>
             <input type="text" name="Name" class="form-control" placeholder="Team Name" autocomplete="on" required>
 
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
             <label class="label-class required ownHeading">Driver Name</label>
             <input type="text" name="Name" class="form-control" placeholder="Driver Name" autocomplete="on" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
             <label class="label-class required ownHeading">Patrolman</label>
             <input type="text" name="Name" class="form-control" placeholder="Petrolman" autocomplete="on" required>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
             <label class="label-class required ownHeading">Sector</label>
             <input type="text" name="Name" class="form-control" placeholder="sector" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
             <label class="label-class required ownHeading">Call sign</label>
             <input type="text" name="Name" class="form-control" placeholder="call sign" required>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-4 pr-1">
 
             <label class="label-class required ownHeading col s12 m12 set-margin">Shift time</label>
             <div class="form-group">
@@ -135,6 +141,7 @@
           <p class="contentHeadingParah">Plan a shift by filling in the following details:</p>
         </div>
       </div>
+
       <div class="col s12 m6 right-align">
         <span class="mr-3">
           <svg (click)="backButton('2')" clas="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
@@ -165,14 +172,18 @@
         </span>
       </div>
     </div>
-
+    <div class="header">
+      <span class="indicator active"></span>
+      <span class="indicator"></span>
+      <span class="indicator"></span>
+  </div>
     <div>
-      <table class="responsive-table highlight">
+      <table class="responsive-table highlight ownTable">
         <thead>
           <tr>
-            <th width="10%">SR.No.</th>
-            <th>Time</th>
-            <th>Location</th>
+            <th>SR.No.</th>
+            <th class="pl-5">Time</th>
+            <th class="pl-4">Location</th>
             <th>Specific Purpose</th>
             <th>Reason For Deviation</th>
           </tr>
@@ -191,16 +202,20 @@
               </span>
             </td>
             <td>
-              <span class="startTime">10:22</span>
-              <span class="endTime">10:22</span>
+              <span class="startTime">
+               <input type="text" class="ownInput" placeholder="10.00">
+              </span>
+              <span class="endTime">
+                <input type="text" class="ownInput" placeholder="10.00">
+              </span>
             </td>
             <td>
-              <span class="location">
+              <button class="location btn">
                 <span class="bg-purple">
                   <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
                 </span>
                 <span class="bg-purple">Pick</span>
-              </span>
+              </button>
             </td>
             <td>
               <div class="input-field col s12 m6 pl-0">
@@ -215,7 +230,7 @@
               </div>
             </td>
             <td>
-              <div class="input-field col s12 m2 pl-0">
+              <div class="input-field col s12 m-0 pl-0">
                 <textarea class="ownTextArea">Type Here</textarea>
               </div>
             </td>
@@ -236,12 +251,12 @@
               <span class="endTime">10:22</span>
             </td>
             <td>
-              <span class="location">
+              <button class="location btn">
                 <span class="bg-purple">
                   <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
                 </span>
                 <span class="bg-purple">Pick</span>
-              </span>
+              </button>
             </td>
             <td>
               <div class="input-field col s12 m6 pl-0">
@@ -256,53 +271,12 @@
               </div>
             </td>
             <td>
-              <div class="input-field col s12 m2 pl-0">
+              <div class="input-field col s12 m-0 pl-0">
                 <textarea class="ownTextArea">Type Here</textarea>
               </div>
             </td>
           </tr>
-          <tr>
-            <td>
-              <span class="deleteicon">
-                <span>
-                  <img class="ownDelete" src="../../../assets/img/trash.svg">
-                </span>
-                <span>
-                  2
-                </span>
-              </span>
-            </td>
-            <td>
-              <span class="startTime">10:22</span>
-              <span class="endTime">10:22</span>
-            </td>
-            <td>
-              <span class="location">
-                <span class="bg-purple">
-                  <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
-                </span>
-                <span class="bg-purple">Pick</span>
-              </span>
-            </td>
-            <td>
-              <div class="input-field col s12 m6 pl-0">
-                <select class="browser-default">
-                  <option value="" disabled selected>Choose divison</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                  <option value="4">Option 4</option>
-                  <option value="5">Other.......</option>
-                </select>
-              </div>
-            </td>
-            <td>
-              <div class="input-field col s12 m2 pl-0">
-                <textarea class="ownTextArea">Type Here</textarea>
-              </div>
-            </td>
-          </tr>
-          
+                  
         </tbody>
       </table>
       <!-- </div> -->
