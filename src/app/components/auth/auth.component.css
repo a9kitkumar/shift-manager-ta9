@@ -54,7 +54,15 @@
 
 .input-field input[type=text] {     
     background-color: white;
-    color: black
+    color: black;
+    padding-left: 15px;
+
+  }
+.input-field input[type=password] {     
+    background-color: white;
+    color: black;
+    padding-left: 15px;
+
   }
 
   .input-field input[type=password] {     
@@ -64,8 +72,14 @@
 
   .margin-rows {
     margin-bottom: 0px;
+    justify-content: center;
+
   }
   
   .my-wrapper {
     height: 100%;
+  }
+
+  .submitBuuton{
+    justify-content: center;
   }
