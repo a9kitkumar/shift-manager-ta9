@@ -25,7 +25,7 @@ const darkTheme ={
 export class HomeComponent implements OnInit {
   darkTheme = darkTheme
   auth: boolean = false;
-  shiftData: FormGroup;
+  shiftInfoForm: FormGroup;
   step : number = 1
   startTime: string;
   endTime: string;
@@ -45,29 +45,37 @@ export class HomeComponent implements OnInit {
   }
 
   buildForms(){
-    this.shiftData = this.formBuilder.group({
-      'userName': ['',[Validators.required ]],
-      'password': ['', Validators.required],
-    });  
 
+    // FIRST STEP SHIFT INFO FORM
+    this.shiftInfoForm = this.formBuilder.group({
+      'division': ['',[Validators.required ]],
+      'npc': [''],
+      'teamName': ['',[Validators.required ]],
+      'driverName': ['',[Validators.required ]],
+      'patrolMan': ['',[Validators.required ]],
+      'sector': ['',[Validators.required ]],
+      'callSign': ['',[Validators.required ]],
+      'shiftTime': ['',[Validators.required ]],
+    });
+
+
+    // SECOND STEP SHIFT SCHEDULE INFO FORM
     this.shitScheduleForm = this.formBuilder.group({
       schedules: this.formBuilder.array([
-         // load first row at start
          this.getShiftSchedule()
       ])
     });
   }
 
 
-
+  // Method to build a schedule form
   private getShiftSchedule() {
     const numberPatern = '^[0-9.,]+$';
     return this.formBuilder.group({
       startTime: [''],
       endTime: ['', Validators.required],
-      // qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
-      // unitPrice: ['', [Validators.required, Validators.pattern(numberPatern)]],
-      // unitTotalPrice: [{value: '', disabled: true}]
+      purpose: ['', Validators.required],
+      reasonDeviation: ['', Validators.required],
     });
   }
 

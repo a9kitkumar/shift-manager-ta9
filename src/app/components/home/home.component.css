@@ -1,6 +1,6 @@
  .signform {
   text-transform: capitalize;
-  padding: 8% 8% 0% 8%;
+  padding: 8% 7% 0% 6%;
   height: 100vh;
  }
 
@@ -81,13 +81,14 @@
   padding: 0px 5px!important;
  }
  input.ownInput {
-  width: 30px!important;
+  width: 44px!important;
   border-bottom: 0!important;
   color: #000;
   
 }
  .location{
   display: flex;
+  color:white;
   width: 90px;
   background-color: #7375f8;
   justify-content: center;
@@ -103,14 +104,26 @@
  {
    cursor:pointer;
  }
+.ownDeleteBtn
+{
+ 
+  outline: none;
+  color: white;
+
+
+}
 .ownAddImg
 {
-  max-width: 45px;
+  
   background-color: #7375f8;
-  border-radius: 50%;
-  width: 100%;
   position: fixed;
-  right: 40px;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  outline: none;
+  color: white;
+
+
 }
 .ownTextArea
 {
@@ -131,12 +144,15 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  padding-left: 15px;
+  padding-left: 0px;
 }
-
+.ownDeleteBtn{
+  background: transparent ;
+  box-shadow: none;
+}
 .ownDelete {
   width: 100%;
-  max-width: 18px;
+  max-width: 24px;
   margin-right: 18px;
   position: relative;
   left: -28px;
@@ -376,7 +392,10 @@ li {
   vertical-align: middle;
   border-bottom: 1px solid #636363;
 } */
-tr {
+.scheduleTable thead tr {
+  border-bottom: none!important;
+}
+.scheduleTable tbody tr {
   border-bottom: 2px solid #565656;
 }
 .table thead th {
@@ -384,10 +403,10 @@ tr {
   border-bottom: 0;
 }
 .table td, .table th {
-  padding: .75rem;
+  color: white;
+  padding: 0.5rem 0 0px 12px;
   vertical-align: middle;
-  border-top: 0;
-}
+  border-top: 0;}
 
 @media(max-width:776px){
   .writeimg {
@@ -452,3 +471,12 @@ select {
 }
 
 }
+
+/* 
+::ng-deep .right-align button:disabled,
+button[disabled]{
+  opacity: 34%!important;
+  background-color: none!important ;
+
+} */
+
