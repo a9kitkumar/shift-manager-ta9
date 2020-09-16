@@ -11,7 +11,7 @@
         </div>
         <div class="col s12 m6 right-align">
 
-          <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="step=2" [disabled]="shiftInfoForm.valid"><i
+          <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="step=2" [disabled]="!shiftInfoForm.valid"><i
               class="material-icons right next-button">forward</i>Next</button>
         </div>
       </div>
@@ -150,7 +150,7 @@
             </svg>
           </span>
           <span>
-            <button class="btn waves-effect waves-light button-next" type="submit" name="action" [disabled]="shitScheduleForm.valid" (click)="step=3"><i
+            <button class="btn waves-effect waves-light button-next" type="submit" name="action" [disabled]="!shitScheduleForm.valid" (click)="step=3"><i
                 class="material-icons right next-button">forward</i>Next</button>
             <!-- <img src="../../../assets/img/next.svg" (click)="nextButton('2')" class="arrowsvg"> -->
           </span>
@@ -306,7 +306,7 @@
           </span>
           <span>
             <button class="btn waves-effect waves-light button-next" type="submit" name="action"
-              (click)="nextButton('1')"><i class="material-icons right next-button">forward</i>Finish</button>
+              (click)="step= 1"><i class="material-icons right next-button">forward</i>Finish</button>
           </span>
         </div>
       </div>

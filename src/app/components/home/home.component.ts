@@ -9,10 +9,10 @@ const darkTheme ={
       buttonColor: '#fff'
   },
   dial: {
-      dialBackgroundColor: '#555',
+      dialBackgroundColor: '#32393D',
   },
   clockFace: {
-      clockFaceBackgroundColor: '#555',
+      clockFaceBackgroundColor: '#32393D',
       clockHandColor: '#7375f8',
       clockFaceTimeInactiveColor: '#fff'
   }
