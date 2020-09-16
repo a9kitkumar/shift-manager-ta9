@@ -1,27 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators ,FormArray} from '@angular/forms';
+import { Observable } from "rxjs";
+import { first } from 'rxjs/operators';
+const darkTheme ={
+  container: {
+      bodyBackgroundColor: '#424242',
+      buttonColor: '#fff'
+  },
+  dial: {
+      dialBackgroundColor: '#555',
+  },
+  clockFace: {
+      clockFaceBackgroundColor: '#555',
+      clockHandColor: '#7375f8',
+      clockFaceTimeInactiveColor: '#fff'
+  }
+};
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  darkTheme = darkTheme
   auth: boolean = false;
   shiftData: FormGroup;
-  stepOne: boolean = true;
-  stepTwo: boolean = false;
-  stepThree: boolean = false;
-
-  constructor(private route: Router, private fb: FormBuilder) 
-  {
-    this.shiftData = this.fb.group({
-      'userName': ['',[Validators.required ]],
-      'password': ['', Validators.required],
-    });  
-  }
+  step : number = 1
+  startTime: string;
+  endTime: string;
+  shitScheduleForm: FormGroup
+  constructor(private route: Router, private formBuilder: FormBuilder){}
 
   ngOnInit(): void {
+    this.buildForms();
     localStorage.getItem('authentication') === 'true' ? this.auth = true : this.auth = false;
     this.unauthorizedNavigation();
   }
@@ -32,59 +44,52 @@ export class HomeComponent implements OnInit {
     !this.auth ? this.route.navigate(['/login']) : this.route.navigate([''])
   }
 
-  //activates when next button clicked
-  nextButton(slide: any)
-  {
-    switch(slide)
-    {
-      case '1':
-        {
-        this.stepOne = false;
-        this.stepThree = false;
-        this.stepTwo = true;
-        break;
-        }
-        case '2':
-          {
-            this.stepTwo = false;
-            this.stepOne = false;
-            this.stepThree = true;
-            break;
-          }
-          case '3':
-            {
-              this.stepTwo = false;      
-              this.stepThree = false;
-              this.stepOne = true;
-            }    
-    }
+  buildForms(){
+    this.shiftData = this.formBuilder.group({
+      'userName': ['',[Validators.required ]],
+      'password': ['', Validators.required],
+    });  
+
+    this.shitScheduleForm = this.formBuilder.group({
+      schedules: this.formBuilder.array([
+         // load first row at start
+         this.getShiftSchedule()
+      ])
+    });
   }
 
-  backButton(slide: any)
-  {
-    switch(slide)
-    {
-    case '2':
-        {
-          this.stepThree = false;
-          this.stepTwo = false;
-          this.stepOne = true;
-        break;
-        }
-        case '3':
-          {
-            this.stepOne = false;
-            this.stepThree = false;
-            this.stepTwo = true;
-            break;
-          }
-        }
+
+
+  private getShiftSchedule() {
+    const numberPatern = '^[0-9.,]+$';
+    return this.formBuilder.group({
+      startTime: [''],
+      endTime: ['', Validators.required],
+      // qty: [1, [Validators.required, Validators.pattern(numberPatern)]],
+      // unitPrice: ['', [Validators.required, Validators.pattern(numberPatern)]],
+      // unitTotalPrice: [{value: '', disabled: true}]
+    });
   }
 
-  //adding details on plus icon click
-  addDetails()
+
+
+  /**
+   * Add new schedule row into form
+   */
+  addShiftSchedule()
   {
-    
+    const control = <FormArray>this.shitScheduleForm.controls['schedules'];
+    control.push(this.getShiftSchedule());
   }
+
+
+    /**
+   * Remove schedule row from form on click delete button
+   */
+  removeShiftSchedule(i: number) {
+    const control = <FormArray>this.shitScheduleForm.controls['schedules'];
+    control.removeAt(i);
+  }
+
 
 }

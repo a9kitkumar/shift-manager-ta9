@@ -1,4 +1,5 @@
-<section *ngIf="stepOne" class="ownSection">
+<div [ngSwitch]="step" >
+<section class="ownSection" *ngSwitchCase="1">
   <div class="signform">
 
     <div class="row">
@@ -9,49 +10,9 @@
         </div>
       </div>
       <div class="col s12 m6 right-align">
-        <!-- <img (click)="nextButton('1')" src="../../../assets/img/next.svg" class="arrowsvg"> -->
-
-        <!-- <svg (click)="nextButton('1')" class="arrowsvg" xmlns="http://www.w3.org/2000/svg" width="164" height="59"
-          viewBox="0 0 164 59" style="
-    height: 45px;
-">
-          <defs>
-            <style>
-              .a {
-                fill: #6b51f8;
-              }
-
-              .b {
-                fill: #fff;
-                font-size: 22px;
-                font-family: HelveticaNeue-Bold, Helvetica Neue;
-                font-weight: 700;
-              }
-
-              .c {
-                fill: #a596f8;
-              }
-
-              .d {
-                fill: none;
-                stroke: #fff;
-                stroke-linecap: round;
-                stroke-width: 4px;
-              }
-
-            </style>
-          </defs>
-          <rect class="a" width="164" height="59" rx="29.5"></rect><text class="b" transform="translate(22 38)">
-            <tspan x="0" y="0">NEXT </tspan>
-          </text>
-          <circle class="c" cx="22" cy="22" r="22" transform="translate(114 8)"></circle>
-          <g transform="translate(-1621 -227)">
-            <line class="d" x2="9.358" transform="translate(1750.248 256.583)"></line>
-            <path class="d" d="M4094.5,247.98l5.818,4.687-5.818,4.9" transform="translate(-2335.996 3.914)"></path>
-          </g>
-        </svg> -->
+      
         <button class="btn waves-effect waves-light button-next" type="submit" name="action"
-          (click)="nextButton('1')"><i class="material-icons right next-button">forward</i>Next</button>
+          (click)="step=2"><i class="material-icons right next-button">forward</i>Next</button>
       </div>
     </div>
     <div class="header">
@@ -131,7 +92,7 @@
 
 <!-- ===========================================Second slide================================ -->
 
-<section *ngIf="stepTwo" class="ownSection">
+<section class="ownSection" *ngSwitchCase="2">
   <div class="signform">
 
     <div class="row">
@@ -144,29 +105,8 @@
 
       <div class="col s12 m6 right-align">
         <span class="mr-3">
-          <!-- <svg (click)="backButton('2')" clas="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
-            <defs>
-              <style>
-                .a {
-                  fill: #7375f8;
-                }
-
-                .b {
-                  fill: none;
-                  stroke: #fff;
-                  stroke-linecap: round;
-                  stroke-width: 4px;
-                }
-
-              </style>
-            </defs>
-            <circle class="a" cx="22" cy="22" r="22" />
-            <g transform="translate(14.677 16.893)">
-              <line class="b" x1="9.358" transform="translate(4.718 4.69)" />
-              <path class="b" d="M4100.318,247.98l-5.818,4.687,5.818,4.9" transform="translate(-4094.5 -247.98)" />
-            </g>
-          </svg> -->
-          <svg (click)="backButton('2')" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+          <svg (click)="step = 1" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            viewBox="0 0 44 44">
             <defs>
               <style>
                 .a {
@@ -179,7 +119,6 @@
                   stroke-linecap: round;
                   stroke-width: 4px;
                 }
-
               </style>
             </defs>
             <circle class="a" cx="22" cy="22" r="22" />
@@ -191,117 +130,126 @@
         </span>
         <span>
           <button class="btn waves-effect waves-light button-next" type="submit" name="action"
-            (click)="nextButton('2')"><i class="material-icons right next-button">forward</i>Next</button>
+            (click)="step=3"><i class="material-icons right next-button">forward</i>Next</button>
           <!-- <img src="../../../assets/img/next.svg" (click)="nextButton('2')" class="arrowsvg"> -->
         </span>
       </div>
     </div>
     <div class="header">
-      <span class="indicator active"></span>
       <span class="indicator"></span>
+      <span class="indicator active"></span>
       <span class="indicator"></span>
     </div>
     <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="text-center">SR.No.</th>
-            <th class="pl-5">Time</th>
-            <th class="pl-4">Location</th>
-            <th>Specific Purpose</th>
-            <th>Reason For Deviation</th>
-          </tr>
-        </thead>
+      <form [formGroup]="shitScheduleForm" novalidate>
+        <table formArrayName="schedules" class="table">
+          <thead>
+            <tr>
+              <th class="text-center">SR.No.</th>
+              <th class="pl-5">Time</th>
+              <th class="pl-4">Location</th>
+              <th>Specific Purpose</th>
+              <th>Reason For Deviation</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <td>
-              <span class="deleteicon">
-                <span>
-                  <img class="ownDelete" src="../../../assets/img/trash.svg">
+          <tbody>
+            <tr [formGroupName]="i" *ngFor="let schedule of shitScheduleForm.controls.schedules.controls; let i=index">
+              <td>
+                <span class="deleteicon">
+                  <span>
+                    <img class="ownDelete" src="../../../assets/img/trash.svg">
+                  </span>
+                  <span>
+                    1
+                  </span>
                 </span>
-                <span>
-                  1
+              </td>
+              <td>
+                <span class="startTime">
+                  <input class="ownInput" placeholder="Custom theme" formControlName="startTime" name="startTime"
+                    aria-label="Custom theme" [format]="24" [ngxTimepicker]="beginTime" readonly>
+                  <ngx-material-timepicker [minutesGap]="5" #beginTime [appendToInput]="true" [theme]="darkTheme">
+                  </ngx-material-timepicker>
                 </span>
-              </span>
-            </td>
-            <td>
-              <span class="startTime">
-                <input type="text" class="ownInput" placeholder="10.00">
-              </span>
-              <span class="endTime">
-                <input type="text" class="ownInput" placeholder="10.00">
-              </span>
-            </td>
-            <td>
-              <button class="location btn">
-                <span class="bg-purple">
-                  <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
+                <span class="endTime">
+                  <input class="ownInput" [format]="24" placeholder="Custom theme" formControlName="endTime"
+                    name="endTime" [max]="startTime" aria-label="Custom theme" [ngxTimepicker]="finsishTime" readonly>
+                  <ngx-material-timepicker [minutesGap]="5" #finsishTime [appendToInput]="true" [theme]="darkTheme">
+                  </ngx-material-timepicker>
                 </span>
-                <span class="bg-purple">Pick</span>
-              </button>
-            </td>
-            <td>
-              <div class="input-field col s12 m6 pl-0">
-                <select class="browser-default">
-                  <option value="" disabled selected>Choose divison</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                  <option value="4">Option 4</option>
-                  <option value="5">Other.......</option>
-                </select>
-              </div>
-            </td>
-            <td>
-              <div class="input-field col s12 m-0 pl-0">
-                <textarea class="ownTextArea">Type Here</textarea>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="deleteicon">
-                <span>
-                  <img class="ownDelete" src="../../../assets/img/trash.svg">
+              </td>
+              <td>
+                <button class="location btn">
+                  <span class="bg-purple">
+                    <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
+                  </span>
+                  <span class="bg-purple">Pick</span>
+                </button>
+              </td>
+              <td>
+                <div class="input-field col s12 m6 pl-0">
+                  <select class="browser-default">
+                    <option value="" disabled selected>Choose divison</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Other.......</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="input-field col s12 m-0 pl-0">
+                  <textarea class="ownTextArea">Type Here</textarea>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="deleteicon">
+                  <span>
+                    <img class="ownDelete" src="../../../assets/img/trash.svg">
+                  </span>
+                  <span>
+                    2
+                  </span>
                 </span>
-                <span>
-                  2
-                </span>
-              </span>
-            </td>
-            <td>
-              <span class="startTime">10:22</span>
-              <span class="endTime">10:22</span>
-            </td>
-            <td>
-              <button class="location btn">
-                <span class="bg-purple">
-                  <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
-                </span>
-                <span class="bg-purple">Pick</span>
-              </button>
-            </td>
-            <td>
-              <div class="input-field col s12 m6 pl-0">
-                <select class="browser-default">
-                  <option value="" disabled selected>Choose divison</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                  <option value="4">Option 4</option>
-                  <option value="5">Other.......</option>
-                </select>
-              </div>
-            </td>
-            <td>
-              <div class="input-field col s12 m-0 pl-0">
-                <textarea class="ownTextArea">Type Here</textarea>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+              <td>
+                <span class="startTime">10:22</span>
+                <span class="endTime">10:22</span>
+              </td>
+              <td>
+                <button class="location btn">
+                  <span class="bg-purple">
+                    <img class="bg-purple ownLocation" src="../../../assets/img/location.svg">
+                  </span>
+                  <span class="bg-purple">Pick</span>
+                </button>
+              </td>
+              <td>
+                <div class="input-field col s12 m6 pl-0">
+                  <select class="browser-default">
+                    <option value="" disabled selected>Choose divison</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Other.......</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="input-field col s12 m-0 pl-0">
+                  <textarea class="ownTextArea">Type Here</textarea>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </form>
       <!-- </div> -->
       <span>
         <img class="ownAddImg cursorPointer" src="../../../assets/img/x.svg" (click)="addDetails()">
@@ -313,173 +261,118 @@
 
 <!-- =================================Third Slide============================ -->
 
-<section *ngIf="stepThree">
+<section *ngSwitchCase="3">
   <div class="signform">
- 
-  <div class="row">
-    <div class="col s12 m6">
-      <div style="margin-left: 10px; color: #fff; ">
-        <h2 class="contentHeading">Hello, Joe</h2>
-        <p class="contentHeadingParah">Plan a shift by filling in the following details:</p>
+
+    <div class="row">
+      <div class="col s12 m6">
+        <div style="margin-left: 10px; color: #fff; ">
+          <h2 class="contentHeading">Hello, Joe</h2>
+          <p class="contentHeadingParah">Plan a shift by filling in the following details:</p>
+        </div>
+      </div>
+
+      <div class="col s12 m6 right-align">
+        <span class="mr-3">
+
+          <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            viewBox="0 0 44 44">
+            <defs>
+              <style>
+                .a {
+                  fill: #939090;
+                }
+
+                .b {
+                  fill: none;
+                  stroke: #fff;
+                  stroke-linecap: round;
+                  stroke-width: 4px;
+                }
+              </style>
+            </defs>
+            <circle class="a" cx="22" cy="22" r="22" />
+            <g transform="translate(14.677 16.893)">
+              <line class="b" x1="9.358" transform="translate(4.718 4.69)" />
+              <path class="b" d="M4100.318,247.98l-5.818,4.687,5.818,4.9" transform="translate(-4094.5 -247.98)" />
+            </g>
+          </svg>
+        </span>
+        <span>
+          <button class="btn waves-effect waves-light button-next" type="submit" name="action"
+            (click)="nextButton('1')"><i class="material-icons right next-button">forward</i>Finish</button>
+        </span>
       </div>
     </div>
-
-    <div class="col s12 m6 right-align">
-      <span class="mr-3">
-        <!-- <svg (click)="backButton('2')" clas="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
-          <defs>
-            <style>
-              .a {
-                fill: #7375f8;
-              }
-
-              .b {
-                fill: none;
-                stroke: #fff;
-                stroke-linecap: round;
-                stroke-width: 4px;
-              }
-
-            </style>
-          </defs>
-          <circle class="a" cx="22" cy="22" r="22" />
-          <g transform="translate(14.677 16.893)">
-            <line class="b" x1="9.358" transform="translate(4.718 4.69)" />
-            <path class="b" d="M4100.318,247.98l-5.818,4.687,5.818,4.9" transform="translate(-4094.5 -247.98)" />
-          </g>
-        </svg> -->
-        <svg (click)="backButton('3')" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
-          <defs>
-            <style>
-              .a {
-                fill: #939090;
-              }
-
-              .b {
-                fill: none;
-                stroke: #fff;
-                stroke-linecap: round;
-                stroke-width: 4px;
-              }
-
-            </style>
-          </defs>
-          <circle class="a" cx="22" cy="22" r="22" />
-          <g transform="translate(14.677 16.893)">
-            <line class="b" x1="9.358" transform="translate(4.718 4.69)" />
-            <path class="b" d="M4100.318,247.98l-5.818,4.687,5.818,4.9" transform="translate(-4094.5 -247.98)" />
-          </g>
-        </svg>
-      </span>
-      <span>
-        <button class="btn waves-effect waves-light button-next" type="submit" name="action"
-          (click)="nextButton('3')"><i class="material-icons right next-button">forward</i>Finish</button>
-        <!-- <img src="../../../assets/img/next.svg" (click)="nextButton('2')" class="arrowsvg"> -->
-      </span>
+    <div class="header">
+      <span class="indicator"></span>
+      <span class="indicator"></span>
+      <span class="indicator active"></span>
     </div>
-  </div>
-  <div class="header">
-    <span class="indicator active"></span>
-    <span class="indicator"></span>
-    <span class="indicator"></span>
-  </div>
-  
-  <div class="second">
 
-    <!-- <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="backButton('3')"><i
-        class="material-icons right next-button">arrow_back</i></button>
-    <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="nextButton('3')"><i
-        class="material-icons right next-button">check</i>Finish</button>
+    <div class="second">
 
+      <div class="row summery">
 
-    <div style="margin-left: 10px; padding-left:4%; ">
-      <h4>Hello,John Deo</h4>
-      <p>plan a shift by filling in the following Detail:</p>
-
-
-    </div> -->
-    <div class="row summery">
-
-      <div class="col-md-3">
-        <div class="iconWrite">
-          <img class="writeimg" src="../../../assets/img/group.svg" width="200">
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="finish">
-          <h6 class="headingFinal">Shift Summery</h6>
-          <li><label>Divison</label><span>Text</span></li>
-          <li><label>NPC</label><span>Text</span></li>
-          <li><label>Team</label><span>Text</span></li>
-          <li><label>Driver</label><span>Text</span></li>
-          <li><label>Petrolman</label><span>Text</span></li>
-          <li><label>Call Sign</label><span>Text</span></li>
-          <li><label>Sector</label><span>Text</span></li>
-        </div>
-
-      </div>
-      <div class="col-md-4">
-        <div class="finish1">
-          <h6 class="headingFinal">Schedule</h6>
-          <li><label class="col-md-3 pl-0">Divison</label><span class="col-md-9 pr-0">Text</span></li>
-          <li><label class="col-md-3 pl-0">NPC</label><span class="col-md-9 pr-0"> Text</span></li>
-          <li><label class="col-md-3 pl-0">Team</label><span class="col-md-9 pr-0 disabled-dark">River Vally Road, Clarke Quay Blk 3A-3E, Liang Court, The Foothils at Fort Canning Park</span></li>
-          <li><label class="col-md-3 pl-0 " >Driver</label><span class="col-md-9 pr-0 ">Text</span></li>
-          <li><label class="col-md-3 pl-0">Petrolman</label><span class="col-md-9 pr-0">Text</span></li>
-          <li><label class="col-md-3 pl-0">Call Sign</label><span class="col-md-9 pr-0">Text</span></li>
-          <li><label class="col-md-3 pl-0">Sector</label><span class="col-md-9 pr-0">Text</span></li>
-        </div>
-
-      </div>
-      <!-- <div class="col s12 m3">
-        <h6>Schedule</h6>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-        <li>
-          <label>08:12 - 09:12</label><span></span>
-        </li>
-      </div> -->
-      <div class="col-md-2">
-        <div class="col s12 m3 input-field own-signature-field">
-          <h6 class="headingFinal">Other Signature</h6>
-          <!-- <span><img src="sign.png" width="100"></span><br> -->
-
-          <div>
-            <textarea _ngcontent-rvo-c46="" class="ownTextArea">Type Here</textarea>
+        <div class="col-md-3">
+          <div class="iconWrite">
+            <img class="writeimg" src="../../../assets/img/group.svg" width="200">
           </div>
-          
-          <div _ngcontent-vbg-c46="" class="form-group mt-2">
-            <label _ngcontent-vbg-c46="" class="label-class required ownHeading">Team Name </label>
-            <input _ngcontent-vbg-c46="" type="text" name="Name" placeholder="Team Name" autocomplete="on" required="" class="form-control"></div>
-   
-          <div class="form-group mt-2">
-            <label class="headingFinal required">Rank </label>
-            <select class="browser-default">
-              <option value="" disabled selected>Rank</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-          </div>    
+        </div>
+        <div class="col-md-2">
+          <div class="finish">
+            <h6 class="headingFinal">Shift Summery</h6>
+            <li><label>Divison</label><span>Text</span></li>
+            <li><label>NPC</label><span>Text</span></li>
+            <li><label>Team</label><span>Text</span></li>
+            <li><label>Driver</label><span>Text</span></li>
+            <li><label>Petrolman</label><span>Text</span></li>
+            <li><label>Call Sign</label><span>Text</span></li>
+            <li><label>Sector</label><span>Text</span></li>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="finish1">
+            <h6 class="headingFinal">Schedule</h6>
+            <li><label class="col-md-3 pl-0">Divison</label><span class="col-md-9 pr-0">Text</span></li>
+            <li><label class="col-md-3 pl-0">NPC</label><span class="col-md-9 pr-0"> Text</span></li>
+            <li><label class="col-md-3 pl-0">Team</label><span class="col-md-9 pr-0 disabled-dark">River Vally Road,
+                Clarke Quay Blk 3A-3E, Liang Court, The Foothils at Fort Canning Park</span></li>
+            <li><label class="col-md-3 pl-0 ">Driver</label><span class="col-md-9 pr-0 ">Text</span></li>
+            <li><label class="col-md-3 pl-0">Petrolman</label><span class="col-md-9 pr-0">Text</span></li>
+            <li><label class="col-md-3 pl-0">Call Sign</label><span class="col-md-9 pr-0">Text</span></li>
+            <li><label class="col-md-3 pl-0">Sector</label><span class="col-md-9 pr-0">Text</span></li>
+          </div>
+
+        </div>
+        <div class="col-md-2">
+          <div class="col s12 m3 input-field own-signature-field">
+            <h6 class="headingFinal">Other Signature</h6>
+            <!-- <span><img src="sign.png" width="100"></span><br> -->
+
+            <div>
+              <textarea _ngcontent-rvo-c46="" class="ownTextArea">Type Here</textarea>
+            </div>
+
+            <div _ngcontent-vbg-c46="" class="form-group mt-2">
+              <label _ngcontent-vbg-c46="" class="label-class required ownHeading">Team Name </label>
+              <input _ngcontent-vbg-c46="" type="text" name="Name" placeholder="Team Name" autocomplete="on" required=""
+                class="form-control"></div>
+
+            <div class="form-group mt-2">
+              <label class="headingFinal required">Rank </label>
+              <select class="browser-default">
+                <option value="" disabled selected>Rank</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </section>
+</div>
