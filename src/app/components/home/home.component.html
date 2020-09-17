@@ -126,7 +126,7 @@
 
         <div class="col s12 m6 right-align">
           <span class="mr-3">
-            <svg (click)="step = 1" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            <svg (click)="step = 1" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
               viewBox="0 0 44 44">
               <defs>
                 <style>
@@ -181,7 +181,7 @@
                 <td>
                     <button mat-fab [disabled]="i ==0"  class="ownDeleteBtn" aria-label="Example icon button with a delete icon"(click)="removeShiftSchedule(i)">
 
-                      <mat-icon *ngIf="i>0"color="primary" >delete</mat-icon>
+                      <mat-icon *ngIf="i>0"color="primary" class="primary-gray">delete</mat-icon>
                     </button>
                   </td>
                 <td>
@@ -207,8 +207,8 @@
                 </td>
                 <td>
                   <button  mat-fab aria-label="Example icon button with a delete icon"class="location btn">
-                    <mat-icon color="" >place</mat-icon>                
-                    <span class="bg-purple">Pick</span>
+                    <mat-icon color="" class="own-place">place</mat-icon>                
+                    <span class="bg-purple ownFont12">Pick</span>
                   </button>
                 </td>
                 <td>
@@ -281,7 +281,7 @@
         <div class="col s12 m6 right-align">
           <span class="mr-3">
 
-            <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
               viewBox="0 0 44 44">
               <defs>
                 <style>
