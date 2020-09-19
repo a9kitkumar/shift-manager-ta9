@@ -217,6 +217,9 @@ select option {
   margin-left: 15px;
   background-color: #6e7071;
 }
+.header .indicator:hover {
+    background-color: #7375f8;
+}
 div.header span.active {
   background-color: #7375f8;
 }
@@ -472,6 +475,10 @@ select {
 
 }
 
+::ng-deep .timepicker__header {
+  position: relative!important;
+  height:57px
+}
 /* 
 ::ng-deep .right-align button:disabled,
 button[disabled]{

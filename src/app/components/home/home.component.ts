@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators ,FormArray} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Observable } from "rxjs";
 import { first } from 'rxjs/operators';
-const darkTheme ={
+const darkTheme = {
   container: {
-      bodyBackgroundColor: '#424242',
-      buttonColor: '#fff'
+    bodyBackgroundColor: '#424242',
+    buttonColor: '#fff'
   },
   dial: {
-      dialBackgroundColor: '#32393D',
+    dialBackgroundColor: '#32393D'
   },
   clockFace: {
-      clockFaceBackgroundColor: '#32393D',
-      clockHandColor: '#7375f8',
-      clockFaceTimeInactiveColor: '#fff'
+    clockFaceBackgroundColor: '#32393D',
+    clockHandColor: '#7375f8',
+    clockFaceTimeInactiveColor: '#fff'
   }
 };
 @Component({
@@ -25,12 +25,13 @@ const darkTheme ={
 export class HomeComponent implements OnInit {
   darkTheme = darkTheme
   auth: boolean = false;
-  shiftInfoForm: FormGroup;
-  step : number = 1
+  signatureForm: FormGroup;
+  step: number = 1
   startTime: string;
   endTime: string;
   shitScheduleForm: FormGroup
-  constructor(private route: Router, private formBuilder: FormBuilder){}
+  shiftInfoForm: FormGroup;
+  constructor(private route: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.buildForms();
@@ -39,44 +40,51 @@ export class HomeComponent implements OnInit {
   }
 
   // navigate to login page if unauthorized access
-  unauthorizedNavigation()
-  {
+  unauthorizedNavigation() {
     !this.auth ? this.route.navigate(['/login']) : this.route.navigate([''])
   }
 
-  buildForms(){
+  buildForms() {
 
     // FIRST STEP SHIFT INFO FORM
     this.shiftInfoForm = this.formBuilder.group({
-      'division': ['',[Validators.required ]],
+      'division': ['', [Validators.required]],
       'npc': [''],
-      'teamName': ['',[Validators.required ]],
-      'driverName': ['',[Validators.required ]],
-      'patrolMan': ['',[Validators.required ]],
-      'sector': ['',[Validators.required ]],
-      'callSign': ['',[Validators.required ]],
-      'shiftTime': ['',[Validators.required ]],
+      'teamName': ['', [Validators.required]],
+      'driverName': ['', [Validators.required]],
+      'patrolMan': ['', [Validators.required]],
+      'sector': ['', [Validators.required]],
+      'callSign': ['', [Validators.required]],
+      'shiftTime': ['', [Validators.required]],
     });
-
+    this.onChangeShiftTime()
 
     // SECOND STEP SHIFT SCHEDULE INFO FORM
     this.shitScheduleForm = this.formBuilder.group({
       schedules: this.formBuilder.array([
-         this.getShiftSchedule()
+        this.getShiftSchedule()
       ])
+    });
+
+    // FIRST STEP SHIFT INFO FORM
+    this.signatureForm = this.formBuilder.group({
+      'signature': ['abc', [Validators.required]],
+      'teamName': ['', [Validators.required]],
+      'rank': ['', [Validators.required]]
     });
   }
 
 
   // Method to build a schedule form
   private getShiftSchedule() {
-    const numberPatern = '^[0-9.,]+$';
     return this.formBuilder.group({
-      startTime: [''],
+      startTime: ['',Validators.required],
       endTime: ['', Validators.required],
+      location: ['5P Hotspot, Official Ease'],
       purpose: ['', Validators.required],
-      reasonDeviation: ['', Validators.required],
+      reasonDeviation: [''],
     });
+
   }
 
 
@@ -84,20 +92,69 @@ export class HomeComponent implements OnInit {
   /**
    * Add new schedule row into form
    */
-  addShiftSchedule()
-  {
+  addShiftSchedule() {
     const control = <FormArray>this.shitScheduleForm.controls['schedules'];
     control.push(this.getShiftSchedule());
+    this.setScheduleTime(control.length-1)
   }
 
 
-    /**
-   * Remove schedule row from form on click delete button
-   */
+  /**
+ * Remove schedule row from form on click delete button
+ */
   removeShiftSchedule(i: number) {
     const control = <FormArray>this.shitScheduleForm.controls['schedules'];
     control.removeAt(i);
   }
 
+  setScheduleTime(index){
+    let timeShift = this.shiftInfoForm.controls.shiftTime.value
+    let schedules = this.shitScheduleForm.get('schedules') as FormArray
 
+    var startTime = schedules.value[index-1].startTime
+    var endTime = schedules.value[index-1].endTime
+
+    var startHours = parseInt(startTime.split(':')[0]);
+    var endHours = parseInt(endTime.split(':')[0]);
+    if(endHours == 24){
+      endHours = 0
+      
+    }
+    if(timeShift == 'day' && endHours == 20)  {
+      endHours = 8
+    };
+    if(timeShift == 'night' && endHours == 8){
+      endHours = 20;
+    } 
+
+    schedules.controls[index].get('startTime').setValue("" + ('0'+endHours).slice(-2) + ":00")
+    schedules.controls[index].get('endTime').setValue("" + ('0'+(endHours + 1)).slice(-2) + ":00")
+
+  }
+
+  //  On click of shift time radio select
+  onChangeShiftTime() {
+    this.shiftInfoForm.get('shiftTime').valueChanges.subscribe(val => {
+      let schedules = this.shitScheduleForm.get('schedules') as FormArray
+
+      schedules.controls[0].get('startTime').setValue(val == 'day' ? '08:00' : '20:00')
+      schedules.controls[0].get('endTime').setValue(val == 'day' ? '09:00' : '21:00')
+
+      for (var i = 1; i < schedules.controls.length; i++) {
+        var startTime = schedules.value[i-1].startTime
+        var endTime = schedules.value[i-1].endTime
+        // var startTime = schedules.controls[i].get('startTime').value
+        // var endTime = schedules.controls[i].get('endtime').value
+        var startHours = parseInt(startTime.split(':')[0]);
+        var endHours = parseInt(endTime.split(':')[0]);
+        if(endHours == 24){
+          endHours = 0
+          
+        }
+        schedules.controls[i].get('startTime').setValue("" + ('0'+endHours).slice(-2) + ":00")
+        schedules.controls[i].get('endTime').setValue("" + ('0'+(endHours + 1)).slice(-2) + ":00")
+
+      }
+    });
+  }
 }
