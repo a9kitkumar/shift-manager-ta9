@@ -438,6 +438,27 @@ li {
   .primary-gray.mat-icon.mat-primary {
     color: gray;
 }
+
+.ownPoisitionRelative
+{
+  position: relative;
+}
+button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent:hover {
+  background: #a696f8;
+}
+button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent .ownPick:hover {
+  background: #a696f8;
+}
+button.mat-focus-indicator.ownAddImg.cursorPointer.mat-fab.mat-button-base.mat-primary:hover {
+  background: #a696f8;
+}
+.ownConditon{
+  position: absolute!important;
+  border: transparent!important;
+  background: transparent!important;
+  bottom: 7px!important;
+  width: 92%!important;
+}
 @media(max-width:776px){
   .writeimg {
     top: -6px;

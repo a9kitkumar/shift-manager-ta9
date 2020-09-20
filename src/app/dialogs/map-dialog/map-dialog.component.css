@@ -1,6 +1,6 @@
-.bg-purple{
+/* .bg-purple{
     background-color: #7375f8;
-   }
+   } */
   
    .button-close {
     background: #4d5456;
@@ -51,7 +51,14 @@
     background-color: #a696f8;
     padding: 3px 7px;
    }
-   
+   button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent:hover {
+    background: #a696f8;
+    box-shadow: 3px 5px #0a0a0a;
+  }
+  button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent .ownPick:hover {
+    background: #a696f8;
+    /* box-shadow: 3px 5px #0a0a0a; */
+  }
    .location{
     display: flex;
     color:white;

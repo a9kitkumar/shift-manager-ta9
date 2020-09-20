@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
   signatureForm: FormGroup;
   step: number = 1
   startTime: string;
+  option;
   endTime: string;
   shitScheduleForm: FormGroup
   shiftInfoForm: FormGroup;
@@ -68,9 +69,16 @@ export class HomeComponent implements OnInit {
   unauthorizedNavigation() {
     !this.auth ? this.route.navigate(['/login']) : this.route.navigate([''])
   }
-
+  onOptionSelected(index,optionIndex){
+    if(optionIndex == 5){
+    this.option[index] =  true
+    }
+    else{
+      this.option[index] =false
+    }
+  }
   buildForms() {
-
+    this.option = []
     // FIRST STEP SHIFT INFO FORM
     this.shiftInfoForm = this.formBuilder.group({
       'division': ['', [Validators.required]],

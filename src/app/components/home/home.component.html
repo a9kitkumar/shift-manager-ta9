@@ -12,7 +12,7 @@
         <div class="col s12 m6 right-align">
 
           <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="step=2"
-            [disabled]="shiftInfoForm.valid"><i class="material-icons right next-button">forward</i>Next</button>
+            [disabled]="!shiftInfoForm.valid"><i class="material-icons right next-button">forward</i>Next</button>
         </div>
       </div>
       <div class="header">
@@ -132,7 +132,7 @@
 
         <div class="col s12 m6 right-align">
           <span class="mr-3">
-            <svg (click)="step = 1" class="cursorPointer backButton" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            <svg (click)="step = 1" class="cursorPointer backButton" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
               viewBox="0 0 44 44">
               <defs>
                 <style>
@@ -155,9 +155,10 @@
               </g>
             </svg>
           </span>
-          <span>
+          <span> 
+            <!-- <i class="material-icons right next-button">leftarrow</i> -->
             <button class="btn waves-effect waves-light button-next" type="submit" name="action"
-              [disabled]="shitScheduleForm.valid" (click)="step=3"><i
+              [disabled]="!shitScheduleForm.valid" (click)="step=3"><i
                 class="material-icons right next-button">forward</i>Next</button>
             <!-- <img src="../../../assets/img/next.svg" (click)="nextButton('2')" class="arrowsvg"> -->
           </span>
@@ -223,11 +224,11 @@
                   <app-map-dialog  (location)="addAddress($event,i)"></app-map-dialog>
                 </td>
                 <td>
-                  <div class="input-field col s12 m6 pl-0 groupInputSelect">
-                    <textarea  formControlName="purpose" *ngIf="purpose.selectedIndex === purpose.options.length - 1" placeholder="Type here.." class="browser-default mergetextarea"></textarea>
-                    <select formControlName="purpose" 
-                    [ngStyle]="{'height': (purpose.selectedIndex === purpose.options.length - 1) ? '30px' : '38px'}" 
-                    [class.text-dimmed]="true" #purpose class="browser-default">
+                  <div class="input-field col s12 m6 pl-0 groupInputSelect ownPoisitionRelative">
+                    <textarea  formControlName="purpose" *ngIf="option[i]" placeholder="Type here.." class="browser-default mergetextarea ownTextArea"></textarea>
+                    <select formControlName="purpose" (change)='onOptionSelected(i,purpose.selectedIndex)'  [ngClass]="{'ownConditon':option[i]}"
+                    [ngStyle]="{'height': option[i] ? '30px' : '38px'}" 
+                    [class.text-dimmed]="true" #purpose class="browser-default ">
                       <option value=""  disabled selected>Choose Purpose</option>
                       <option value="purpose1">Purpose 1</option>
                       <option value="purpose2">Purpose 2</option>
@@ -297,7 +298,7 @@
         <div class="col s12 m6 right-align">
           <span class="mr-3">
 
-            <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
               viewBox="0 0 44 44">
               <defs>
                 <style>
@@ -357,7 +358,7 @@
           <div class="col-md-4">
             <div class="finish1">
               <h6 class="headingFinal">Schedule</h6>
-              <li *ngFor="let schedule of shitScheduleForm.controls.schedules.controls; let i=index"><label class="col-md-3 pl-0">{{schedule.controls.startTime.value}}:{{schedule.controls.endTime.value}}</label><span class="col-md-9 pr-0">{{schedule.controls.location.value}}</span></li>
+              <li *ngFor="let schedule of shitScheduleForm.controls.schedules.controls; let i=index"><label class="col-md-3 pl-0">{{schedule.controls.startTime.value}}:{{schedule.controls.endTime.value}}</label><span style="font-style: italic" class="col-md-9 pr-0">{{schedule.controls.location.value}}</span></li>
             </div>
 
           </div>
