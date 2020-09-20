@@ -132,7 +132,7 @@
 
         <div class="col s12 m6 right-align">
           <span class="mr-3">
-            <svg (click)="step = 1" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+            <svg (click)="step = 1" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
               viewBox="0 0 44 44">
               <defs>
                 <style>
@@ -186,12 +186,12 @@
               <tr [formGroupName]="i"
                 *ngFor="let schedule of shitScheduleForm.controls.schedules.controls; let i=index">
                 <td>
-                  <button mat-fab [disabled]="i ==0" class="ownDeleteBtn"
+                  <button mat-fab [ngStyle]="{'visibility': i==0 ? 'hidden' : 'visible'}"[disabled]="i ==0" class="ownDeleteBtn"
                     aria-label="Example icon button with a delete icon" (click)="removeShiftSchedule(i)">
 
-                      <mat-icon *ngIf="i>0"color="primary" class="primary-gray">delete</mat-icon>
-                    </button>
-                  </td>
+                    <mat-icon *ngIf="i>0" color="primary">delete</mat-icon>
+                  </button>
+                </td>
                 <td>
                   <span class="">
                     <span>
@@ -214,20 +214,22 @@
                   </span>
                 </td>
                 <td>
-                  <button  mat-fab aria-label="Example icon button with a delete icon"class="location btn">
-                    <mat-icon color="" class="own-place">place</mat-icon>                
-                    <span class="bg-purple ownFont12">Pick</span>
-                  </button>
+                  <!-- <button mat-fab aria-label="Example icon button with a delete icon" class="location btn">
+                    <mat-icon color="">place</mat-icon>
+                    <span class="bg-purple">Pick</span>
+                  </button> -->
+                  <app-map-dialog  (location)="addAddress($event,i)"></app-map-dialog>
                 </td>
                 <td>
-                  <div class="input-field col s12 m6 pl-0">
-                    <select formControlName="purpose" class="browser-default">
-                      <option value="" disabled selected>Choose Purpose</option>
+                  <div class="input-field col s12 m6 pl-0 groupInputSelect">
+                    <input formControlName="purpose" *ngIf="purpose.selectedIndex === purpose.options.length - 1" placeholder="Type here.." class="browser-default otherInput">
+                    <select formControlName="purpose" [ngStyle]="{'height': (purpose.selectedIndex === purpose.options.length - 1) ? '30px' : '38px'}" [class.text-dimmed]="true" #purpose class="browser-default">
+                      <option value=""  disabled selected>Choose Purpose</option>
                       <option value="purpose1">Purpose 1</option>
                       <option value="purpose2">Purpose 2</option>
                       <option value="purpose3">Purpose 3</option>
                       <option value="purpose4">Purpose 4</option>
-                      <option value="purpose5">Other....</option>
+                      <option value="">Other</option>
                     </select>
                   </div>
                 </td>
@@ -291,7 +293,7 @@
         <div class="col s12 m6 right-align">
           <span class="mr-3">
 
-            <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+            <svg (click)="step = 2" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
               viewBox="0 0 44 44">
               <defs>
                 <style>
@@ -315,7 +317,7 @@
             </svg>
           </span>
           <span>
-            <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="step= 1"><i
+            <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="submitShift()"><i
                 class="material-icons right next-button">forward</i>Finish</button>
           </span>
         </div>
@@ -363,12 +365,13 @@
                 <!-- <span><img src="sign.png" width="100"></span><br> -->
 
                 <div>
-                  <textarea _ngcontent-rvo-c46="" formControlName="signature" class="ownTextArea">Type Here</textarea>
+                  <app-signature-pad></app-signature-pad>
+                  <!-- <textarea _ngcontent-rvo-c46="" formControlName="signature" class="ownTextArea">Type Here</textarea> -->
                 </div>
 
                 <div _ngcontent-vbg-c46="" class="form-group mt-2">
                   <label _ngcontent-vbg-c46="" class="label-class required ownHeading">Team Name </label>
-                  <input _ngcontent-vbg-c46="" formControlName="teamName" type="text" name="Name"
+                  <input _ngcontent-vbg-c46="" [(ngModel)]="shiftInfoForm.controls.teamName.value" formControlName="teamName" type="text" name="Name"
                     placeholder="Team Name" autocomplete="on" required="" class="form-control"></div>
 
                 <div class="form-group mt-2">

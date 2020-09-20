@@ -1,0 +1,15 @@
+.bg-purple{
+    background-color: #7375f8;
+   }
+  
+   .location{
+    display: flex;
+    color:white;
+    width: 90px;
+    background-color: #7375f8;
+    justify-content: center;
+    padding: 0px 0px;
+    border-radius: 49px;
+    height: 28px;
+    align-items: center;
+   }

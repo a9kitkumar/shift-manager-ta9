@@ -12,6 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { SignaturePadComponent } from './components/signature-pad/signature-pad.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MapDialogComponent } from './dialogs/map-dialog/map-dialog.component';
+import { DialogContentExampleDialog } from './dialogs/map-dialog/map-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,10 @@ import {MatIconModule} from '@angular/material/icon';
     AuthComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    SignaturePadComponent,
+    MapDialogComponent,
+    DialogContentExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,9 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     NgxMaterialTimepickerModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

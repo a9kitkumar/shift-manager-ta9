@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Observable } from "rxjs";
 import { first } from 'rxjs/operators';
+import { MatSnackBar, 
+   MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,MatSnackBarRef
+ } from '@angular/material/snack-bar';
+
 const darkTheme = {
   container: {
     bodyBackgroundColor: '#424242',
@@ -23,6 +28,9 @@ const darkTheme = {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   darkTheme = darkTheme
   auth: boolean = false;
   signatureForm: FormGroup;
@@ -31,14 +39,31 @@ export class HomeComponent implements OnInit {
   endTime: string;
   shitScheduleForm: FormGroup
   shiftInfoForm: FormGroup;
-  constructor(private route: Router, private formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private route: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.buildForms();
     localStorage.getItem('authentication') === 'true' ? this.auth = true : this.auth = false;
     this.unauthorizedNavigation();
   }
+  addAddress(event,index){
+    let schedules = this.shitScheduleForm.get('schedules') as FormArray
+    schedules.controls[index].get('location').setValue(event)
+  }
+  openSnackBar() {
+    this._snackBar.openFromComponent(PizzaPartyComponent, {
+      duration: 5 * 1000,
+      data: 'some data',
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
 
+    });
+  }
+  submitShift(){
+    this.buildForms()
+    this.openSnackBar()
+    this.step = 1
+  }
   // navigate to login page if unauthorized access
   unauthorizedNavigation() {
     !this.auth ? this.route.navigate(['/login']) : this.route.navigate([''])
@@ -66,7 +91,7 @@ export class HomeComponent implements OnInit {
       ])
     });
 
-    // FIRST STEP SHIFT INFO FORM
+    // THIRD STEP SHIFT INFO FORM
     this.signatureForm = this.formBuilder.group({
       'signature': ['abc', [Validators.required]],
       'teamName': ['', [Validators.required]],
@@ -78,9 +103,9 @@ export class HomeComponent implements OnInit {
   // Method to build a schedule form
   private getShiftSchedule() {
     return this.formBuilder.group({
-      startTime: ['',Validators.required],
+      startTime: ['', Validators.required],
       endTime: ['', Validators.required],
-      location: ['5P Hotspot, Official Ease'],
+      location: ['',Validators.required],
       purpose: ['', Validators.required],
       reasonDeviation: [''],
     });
@@ -95,7 +120,7 @@ export class HomeComponent implements OnInit {
   addShiftSchedule() {
     const control = <FormArray>this.shitScheduleForm.controls['schedules'];
     control.push(this.getShiftSchedule());
-    this.setScheduleTime(control.length-1)
+    this.setScheduleTime(control.length - 1)
   }
 
 
@@ -107,28 +132,28 @@ export class HomeComponent implements OnInit {
     control.removeAt(i);
   }
 
-  setScheduleTime(index){
+  setScheduleTime(index) {
     let timeShift = this.shiftInfoForm.controls.shiftTime.value
     let schedules = this.shitScheduleForm.get('schedules') as FormArray
 
-    var startTime = schedules.value[index-1].startTime
-    var endTime = schedules.value[index-1].endTime
+    var startTime = schedules.value[index - 1].startTime
+    var endTime = schedules.value[index - 1].endTime
 
     var startHours = parseInt(startTime.split(':')[0]);
     var endHours = parseInt(endTime.split(':')[0]);
-    if(endHours == 24){
+    if (endHours == 24) {
       endHours = 0
-      
+
     }
-    if(timeShift == 'day' && endHours == 20)  {
+    if (timeShift == 'day' && endHours == 20) {
       endHours = 8
     };
-    if(timeShift == 'night' && endHours == 8){
+    if (timeShift == 'night' && endHours == 8) {
       endHours = 20;
-    } 
+    }
 
-    schedules.controls[index].get('startTime').setValue("" + ('0'+endHours).slice(-2) + ":00")
-    schedules.controls[index].get('endTime').setValue("" + ('0'+(endHours + 1)).slice(-2) + ":00")
+    schedules.controls[index].get('startTime').setValue("" + ('0' + endHours).slice(-2) + ":00")
+    schedules.controls[index].get('endTime').setValue("" + ('0' + (endHours + 1)).slice(-2) + ":00")
 
   }
 
@@ -141,20 +166,63 @@ export class HomeComponent implements OnInit {
       schedules.controls[0].get('endTime').setValue(val == 'day' ? '09:00' : '21:00')
 
       for (var i = 1; i < schedules.controls.length; i++) {
-        var startTime = schedules.value[i-1].startTime
-        var endTime = schedules.value[i-1].endTime
+        var startTime = schedules.value[i - 1].startTime
+        var endTime = schedules.value[i - 1].endTime
         // var startTime = schedules.controls[i].get('startTime').value
         // var endTime = schedules.controls[i].get('endtime').value
         var startHours = parseInt(startTime.split(':')[0]);
         var endHours = parseInt(endTime.split(':')[0]);
-        if(endHours == 24){
+        if (endHours == 24) {
           endHours = 0
-          
+
         }
-        schedules.controls[i].get('startTime').setValue("" + ('0'+endHours).slice(-2) + ":00")
-        schedules.controls[i].get('endTime').setValue("" + ('0'+(endHours + 1)).slice(-2) + ":00")
+        schedules.controls[i].get('startTime').setValue("" + ('0' + endHours).slice(-2) + ":00")
+        schedules.controls[i].get('endTime').setValue("" + ('0' + (endHours + 1)).slice(-2) + ":00")
 
       }
     });
   }
 }
+
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  template: `<button class="btn waves-effect 
+  closebtn" 
+  (click)="snackBarRef.dismiss()">x</button>
+  <span class="example-pizza-party">
+  Shift Created  successfully !
+</span><p class="note">You can view it on map or "Shift" data mode.</p>`,
+  styles: [`
+    .example-pizza-party {
+      color: white;
+      font-weight: 550;
+      font-size: 18px;
+    }
+    .note{
+      color:white;
+      margin-bottom: 0px;
+
+    }
+    .closebtn{
+      padding: 0 0 0 0;
+      margin: -8px;
+      right: -3px;
+      width: 20px;
+      height:20px;
+      color:white;
+      font-weight: 550;
+      float:right;
+      border:none;
+      box-shadow:none
+    }
+  `],
+})
+export class PizzaPartyComponent {
+  constructor( 
+    public snackBarRef: MatSnackBarRef<PizzaPartyComponent>) { }
+
+  close(){
+    alert('hi')
+  }
+ }

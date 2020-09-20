@@ -132,7 +132,7 @@
   color: gray;
   margin-top: 0px;
   margin-bottom: 0px;
-  height: 56px;
+  height: 77px;
   border-radius: 5px;
   font-size: 14px;
   font-style: italic;
@@ -492,16 +492,24 @@ select {
 }
 
 }
-
+.otherInput{
+  background-color: white;
+  border-bottom: none;
+  margin-bottom: -6px;
+  border-radius: 4px 4px 0 0;
+  height: 28px;
+}
+.otherInput:focus{
+  border-bottom: none!important;
+  box-shadow: none!important;
+}
+.groupInputSelect{
+  /* width: fit-content; */
+}
 ::ng-deep .timepicker__header {
   position: relative!important;
   height:57px
 }
-/* 
-::ng-deep .right-align button:disabled,
-button[disabled]{
-  opacity: 34%!important;
-  background-color: none!important ;
 
-} */
+
 
