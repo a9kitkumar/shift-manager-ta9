@@ -12,7 +12,7 @@
         <div class="col s12 m6 right-align">
 
           <button class="btn waves-effect waves-light button-next" type="submit" name="action" (click)="step=2"
-            [disabled]="!shiftInfoForm.valid"><i class="material-icons right next-button">forward</i>Next</button>
+            [disabled]="shiftInfoForm.valid"><i class="material-icons right next-button">forward</i>Next</button>
         </div>
       </div>
       <div class="header">
@@ -132,7 +132,7 @@
 
         <div class="col s12 m6 right-align">
           <span class="mr-3">
-            <svg (click)="step = 1" class="cursorPointer" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+            <svg (click)="step = 1" class="cursorPointer backButton" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
               viewBox="0 0 44 44">
               <defs>
                 <style>
@@ -157,7 +157,7 @@
           </span>
           <span>
             <button class="btn waves-effect waves-light button-next" type="submit" name="action"
-              [disabled]="!shitScheduleForm.valid" (click)="step=3"><i
+              [disabled]="shitScheduleForm.valid" (click)="step=3"><i
                 class="material-icons right next-button">forward</i>Next</button>
             <!-- <img src="../../../assets/img/next.svg" (click)="nextButton('2')" class="arrowsvg"> -->
           </span>
@@ -218,12 +218,16 @@
                     <mat-icon color="">place</mat-icon>
                     <span class="bg-purple">Pick</span>
                   </button> -->
+                  <!-- [ngClass]="{'height': (purpose.selectedIndex === purpose.options.length - 1) ? '30px' : '38px'}"  -->
+
                   <app-map-dialog  (location)="addAddress($event,i)"></app-map-dialog>
                 </td>
                 <td>
                   <div class="input-field col s12 m6 pl-0 groupInputSelect">
-                    <input formControlName="purpose" *ngIf="purpose.selectedIndex === purpose.options.length - 1" placeholder="Type here.." class="browser-default otherInput">
-                    <select formControlName="purpose" [ngStyle]="{'height': (purpose.selectedIndex === purpose.options.length - 1) ? '30px' : '38px'}" [class.text-dimmed]="true" #purpose class="browser-default">
+                    <textarea  formControlName="purpose" *ngIf="purpose.selectedIndex === purpose.options.length - 1" placeholder="Type here.." class="browser-default mergetextarea"></textarea>
+                    <select formControlName="purpose" 
+                    [ngStyle]="{'height': (purpose.selectedIndex === purpose.options.length - 1) ? '30px' : '38px'}" 
+                    [class.text-dimmed]="true" #purpose class="browser-default">
                       <option value=""  disabled selected>Choose Purpose</option>
                       <option value="purpose1">Purpose 1</option>
                       <option value="purpose2">Purpose 2</option>

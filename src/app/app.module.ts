@@ -17,6 +17,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MapDialogComponent } from './dialogs/map-dialog/map-dialog.component';
 import { DialogContentExampleDialog } from './dialogs/map-dialog/map-dialog.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,13 @@ import { DialogContentExampleDialog } from './dialogs/map-dialog/map-dialog.comp
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyDEISu9sJOI4c4SRQQDxQTxb98DrjyX1jQ'
+    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]
