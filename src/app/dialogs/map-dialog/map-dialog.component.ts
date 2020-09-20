@@ -11,6 +11,7 @@ export class MapDialogComponent implements OnInit {
   @Output() location = new EventEmitter<string>();
   constructor(public dialog: MatDialog) {}
   address: string
+  flag = false
   ngOnInit(): void {
     this.address = "usa 123 lt space"
   }
@@ -20,6 +21,7 @@ export class MapDialogComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
+      this.flag = true
       this.location.emit(result);
       console.log(`Dialog result: ${result}`);
     });

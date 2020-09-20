@@ -1,5 +1,8 @@
 
-<button mat-fab  (click)="openDialog()"aria-label="Example icon button with a delete icon" class="location btn">
+<button  *ngIf="!flag"mat-fab  (click)="openDialog()"aria-label="Example icon button with a delete icon" class="location btn">
     <mat-icon color="">place</mat-icon>
     <span class="bg-purple ownPick">Pick</span>
-  </button>
+</button>
+<p *ngIf="flag">
+  {{address}}
+</p>
