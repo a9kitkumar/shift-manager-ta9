@@ -1,20 +1,34 @@
-import { Component, OnInit ,Output ,EventEmitter} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { MouseEvent } from '@agm/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { defaults as defaultControls } from 'ol/control';
+
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import XYZ from 'ol/source/XYZ';
+import ZoomToExtent from 'ol/control/ZoomToExtent';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import VectorSource from 'ol/source/Vector';
+import {Vector as VectorLayer} from 'ol/layer';
+import Overlay from 'ol/Overlay';
+import TileJSON from 'ol/source/TileJSON';
+import {Icon, Style} from 'ol/style';
+import {fromLonLat} from 'ol/proj';
 
 @Component({
   selector: 'app-map-dialog',
   templateUrl: './map-dialog.component.html',
   styleUrls: ['./map-dialog.component.css']
 })
-export class MapDialogComponent implements OnInit {
-  @Output() location = new EventEmitter<string>();
+export class MapDialogComponent {
+  // @Output() location = new EventEmitter<string>();  
   constructor(public dialog: MatDialog) {}
-  address: string
+  // address: string
   flag = false
-  ngOnInit(): void {
-    this.address = "usa 123 lt space"
-  }
+  // ngOnInit(): void {
+    // this.address = "usa 123 lt space"
+  // }
   
   openDialog() {
     
@@ -22,7 +36,7 @@ export class MapDialogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.flag = true
-      this.location.emit(result);
+      // this.location.emit(result);
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -30,12 +44,12 @@ export class MapDialogComponent implements OnInit {
 }
 
 // just an interface for type safety.
-interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable: boolean;
-}
+// interface marker {
+	// lat: number;
+	// lng: number;
+	// label?: string;
+	// draggable: boolean;
+// }
 
 
 @Component({
@@ -44,50 +58,152 @@ interface marker {
   styleUrls: ['./map-dialog.component.css']
 
 })
-export class DialogContentExampleDialog {
-  zoom: number = 8;
-  
-  // initial center position for the map
-  lat: number = 51.673858;
-  lng: number = 7.815982;
-  address = "River Vally Road, Clarke Quay Blk 3A-3E, Liang Court, The Foothils at Fort Canning Park"
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+export class DialogContentExampleDialog implements AfterViewInit{
+  map: Map;
+  vectorLayer: any;
+  rasterLayer: any;
+  coordinate: any = [];
+
+  ngAfterViewInit() {
+    this.showMap();
   }
-  
-  mapClicked($event: MouseEvent) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
-      draggable: true
+
+  getCoord(event: any){
+  //   console.log('getCoords called', event)
+  //   this.coordinate = this.map.getEventCoordinate(event);
+  //   var layer = new VectorLayer({
+  //     source: new VectorSource({
+  //         features: [
+  //             new Feature({
+  //                 geometry: new Point(fromLonLat([event.screenX, event.screenY]))
+  //             })
+  //         ]
+  //     })
+  // });
+  // this.map.addLayer(layer);
+
+    // console.log("coordinate: ", this.coordinate);
+    // var iconFeature = new Feature({
+    //   geometry: new Point(coordinate),
+    //   name: 'Null Island',
+    //   // population: 4000,  
+    //   // rainfall: 500,
+    // });
+    // var vectorSource = new VectorSource({
+    //   features: [iconFeature],
+    // });
+    // var vectorLayer = new VectorLayer({
+    //   source: vectorSource,
+    // });
+    
+
+
+
+ }
+
+  showMap()
+  {
+    // var iconFeature = new Feature({
+    //   geometry: new Point([0,0]),
+    //   name: 'Null Island',
+    //   population: 4000,  
+    //   rainfall: 500,
+    // });
+
+    // var iconStyle = new Style({
+    //   image: new Icon({
+    //     anchor: [0.5, 46],
+    //     anchorXUnits: 'fraction',
+    //     anchorYUnits: 'pixels',
+    //     src: 'assets/img/icon.png',
+    //   }),
+    // });
+
+    // iconFeature.setStyle(iconStyle);
+
+    // var vectorSource = new VectorSource({
+    //   features: [iconFeature],
+    // });
+    // var vectorLayer = new VectorLayer({
+    //   source: vectorSource,
+    // });
+
+    this.map = new Map({
+      target: document.getElementById('map'),
+      layers: [
+        new TileLayer({
+          // source: new XYZ({
+          //   url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          // })
+          source: new TileJSON({
+            url: 'https://a.tiles.mapbox.com/v3/aj.1x1-degrees.json?secure=1',
+            crossOrigin: '',
+          }),
+        })
+      ],
+      view: new View({
+        center: [0, 0],
+        zoom: 3,
+      }),
+      // controls: defaultControls().extend([
+      //   new ZoomToExtent({
+      //     extent: [
+      //       813079.7791264898, 5929220.284081122,
+      //       848966.9639063801, 5936863.986909639
+      //     ]
+      //   })
+      // ])
     });
-  }
-  
-  markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-  }
-  
-  markers: marker[] = [
-	  {
-		  lat: 51.673858,
-		  lng: 7.815982,
-		  label: 'A',
-		  draggable: true
-	  },
-	  {
-		  lat: 51.373858,
-		  lng: 7.215982,
-		  label: 'B',
-		  draggable: false
-	  },
-	  {
-		  lat: 51.723858,
-		  lng: 7.895982,
-		  label: 'C',
-		  draggable: true
-	  }
-  ]
-  closeMapdialog(){
+    // var element = document.getElementById('popup');
+    // var popup = new Overlay({
+    //   element: element,
+    //   positioning: 'bottom-center',
+    //   stopEvent: false,
+    //   offset: [0, -50],
+    // });
+    // this.map.addOverlay(popup);
+
+    // this.map.on('click', (evt) => {
+    //   console.log("clicked", evt)
+    //   var feature = this.map.forEachFeatureAtPixel(evt.pixel, (feature) => {
+    //     return feature;
+    //   });
+    //   if (feature) {console.log("feature", feature)
+    //     var coordinates = feature.getGeometry().getCoordinates();
+    //     popup.setPosition(evt.coordinate);
+    //     // $(element).popover({
+    //     //   placement: 'top',
+    //     //   html: true,
+    //     //   content: feature.get('name'),
+    //     // });
+    //     // $(element).popover('show');
+    //   }
+    // });
+  //   var layer = new VectorLayer({
+  //     source: new VectorSource({
+  //         features: [
+  //             new Feature({
+  //                 geometry: new Point(fromLonLat([0, 0]))
+  //             })
+  //         ]
+  //     })
+  // });
+  // this.map.addLayer(layer);
+
+  this.map.on('click', (evt) => {
+    console.log("evt", evt);
+    
+    var layer = new VectorLayer({
+      source: new VectorSource({
+          features: [
+              new Feature({
+                  geometry: new Point(fromLonLat(evt.pixel))
+              })
+          ]
+      })
+  });
+  this.map.addLayer(layer);
+  })
 
   }
 

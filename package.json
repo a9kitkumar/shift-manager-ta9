@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "ngx-material-timepicker": "^5.5.3",
+    "ol": "^6.4.3",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "signature_pad": "^3.0.0-beta.4",
