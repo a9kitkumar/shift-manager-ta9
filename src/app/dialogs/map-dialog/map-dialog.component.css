@@ -73,7 +73,7 @@
 
    ::ng-deep .mat-dialog-container{
     box-shadow: none;
-    background: white;
+    background: transparent;
     }
    ::ng-deep mat-dialog-content{
     width: 100%!important;
@@ -94,7 +94,7 @@
     
     .mapShow{
     width: 600px;
-    height: 600px;
+    height: 447px;
     box-shadow: none;
     background: transparent;
     }

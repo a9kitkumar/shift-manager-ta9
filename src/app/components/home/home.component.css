@@ -441,14 +441,27 @@ li {
     color: gray;
 }
 
+button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent:hover {
+  background: #a696f8;
+  box-shadow: 3px 5px #0a0a0a;
+}
+
+button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent .ownPick:hover {
+  background: #a696f8;
+  /* box-shadow: 3px 5px #0a0a0a; */
+}
+
+.disabledInput{
+  pointer-events: none;
+ }
+.locationeditField{
+display: flex;
+}
 .ownPoisitionRelative
 {
   position: relative;
 }
 button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent:hover {
-  background: #a696f8;
-}
-button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent .ownPick:hover {
   background: #a696f8;
 }
 button.mat-focus-indicator.ownAddImg.cursorPointer.mat-fab.mat-button-base.mat-primary:hover {
@@ -538,7 +551,16 @@ select {
   color: #000000;
   font-weight: 600;
 }
-
+.locationTextArea {
+  color: black;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 75px;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
+  width: 210px;
+}
 .ownTextArea {
   background-color: #fff;
   color: black;

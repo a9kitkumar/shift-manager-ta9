@@ -214,14 +214,39 @@
                     </ngx-material-timepicker>
                   </span>
                 </td>
-                <td>
+                <td >
                   <!-- <button mat-fab aria-label="Example icon button with a delete icon" class="location btn">
                     <mat-icon color="">place</mat-icon>
                     <span class="bg-purple">Pick</span>
                   </button> -->
                   <!-- [ngClass]="{'height': (purpose.selectedIndex === purpose.options.length - 1) ? '30px' : '38px'}"  -->
+                  <!-- <mat-form-field class="example-full-width" *ngIf="schedule.controls.location.value!=''">
+                    <textarea  (click)="openEditDialog(i,schedule.controls.location.value)" formControlName="location" matInput ></textarea>
+                    <mat-icon  style="cursor: pointer;" (click)="editLocation[i] = true" matSuffix>mode_edit</mat-icon>
+                  </mat-form-field> -->
 
-                  <app-map-dialog  (location)="addAddress($event,i)"></app-map-dialog>
+
+                  <div style="display:flex;" *ngIf="schedule.controls.location.value!=''" class="locationeditField">
+                    <!-- <mat-label style="cursor: pointer;"(click)="openMapDialog(i)">{{schedule.controls.location.value}}</mat-label> -->
+                    <textarea formControlName="location" (click)="openMapDialog(i)" type="text"readonly  matInput></textarea>
+                    <!-- <div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div> -->
+
+                    <button mat-icon-button matSuffix (click)="openEditDialog(i,schedule.controls.location.value)" >
+                    <mat-icon class="locationediticon">edit</mat-icon>
+                    </button>
+                  </div>
+                  
+                  <!-- <textarea *ngIf="editLocation[i] != true"formControlName="location" *ngIf="schedule.controls.location.value!=''" class="browser-default mergetextarea locationTextArea"></textarea> -->
+                  
+                  <!-- <mat-icon (click)="editLocation[i] = false" style="cursor: pointer;"*ngIf="schedule.controls.location.value !=''">edit</mat-icon> -->
+                  
+                  
+                  <button   mat-fab  *ngIf="schedule.controls.location.value==''" (click)="openMapDialog(i)"aria-label="Example icon button with a delete icon" class="location btn">
+                    <mat-icon color="">place</mat-icon>
+                    <span class="bg-purple ownPick">Pick</span>
+                  </button>
+                  
+                  <!-- <app-map-dialog *ngIf="schedule.controls.location.value==''" (location)="addAddress($event,i)"></app-map-dialog> -->
                 </td>
                 <td>
                   <div class="input-field col s12 m6 pl-0 groupInputSelect ownPoisitionRelative">
@@ -358,7 +383,7 @@
           <div class="col-md-4">
             <div class="finish1">
               <h6 class="headingFinal">Schedule</h6>
-              <li *ngFor="let schedule of shitScheduleForm.controls.schedules.controls; let i=index"><label class="col-md-3 pl-0">{{schedule.controls.startTime.value}}:{{schedule.controls.endTime.value}}</label><span style="font-style: italic" class="col-md-9 pr-0">{{schedule.controls.location.value}}</span></li>
+              <li *ngFor="let schedule of shitScheduleForm.controls.schedules.controls; let i=index"><label class="col-md-3 pl-0">{{schedule.controls.startTime.value}}-{{schedule.controls.endTime.value}}</label><span style="font-style: italic" class="col-md-9 pr-0">{{schedule.controls.location.value}}</span></li>
             </div>
 
           </div>

@@ -23,19 +23,21 @@ import {toStringHDMS} from 'ol/coordinate';
   styleUrls: ['./map-dialog.component.css']
 })
 export class MapDialogComponent {
-  // @Output() location = new EventEmitter<string>();  
+  @Output() location = new EventEmitter<string>();  
   constructor(public dialog: MatDialog) {}
   // address: string;
   flag = false
   // ngOnInit(): void {
     // this.address = "usa 123 lt space"
   // }
-  
+  closeDialog() {    
+    this.dialog.closeAll()
+  }
   openDialog() {    
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       this.flag = true
-      // this.location.emit(result);
+      this.location.emit(result);
       console.log(`Dialog result: ${result}`);
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Observable } from "rxjs";
@@ -7,6 +7,8 @@ import { MatSnackBar,
    MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,MatSnackBarRef
  } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogContentExampleDialog } from 'src/app/dialogs/map-dialog/map-dialog.component';
 
 const darkTheme = {
   container: {
@@ -37,10 +39,11 @@ export class HomeComponent implements OnInit {
   step: number = 1
   startTime: string;
   option;
+  editLocation = [];
   endTime: string;
   shitScheduleForm: FormGroup
   shiftInfoForm: FormGroup;
-  constructor(private _snackBar: MatSnackBar, private route: Router, private formBuilder: FormBuilder) { }
+  constructor(public dialog: MatDialog,private _snackBar: MatSnackBar, private route: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.buildForms();
@@ -49,7 +52,23 @@ export class HomeComponent implements OnInit {
   }
   addAddress(event,index){
     let schedules = this.shitScheduleForm.get('schedules') as FormArray
-    schedules.controls[index].get('location').setValue(event)
+    schedules.controls[index].get('location').setValue(event.toString())
+  }
+  toggleDisable(index,isEditing){
+    let schedules = this.shitScheduleForm.get('schedules') as FormArray
+    schedules.controls[index].get('location')[isEditing ? 'enable' : 'disable']();
+
+  }
+  openMapDialog(index){
+    let schedules = this.shitScheduleForm.get('schedules') as FormArray
+
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != undefined && (typeof result)=='string')
+      schedules.controls[index].get('location').setValue(result.toString())
+      console.log(`Dialog result: ${result}`);
+    });
+
   }
   openSnackBar() {
     this._snackBar.openFromComponent(PizzaPartyComponent, {
@@ -190,8 +209,43 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+  openEditDialog(index,value){
+    const dialogRef = this.dialog.open(EditLocationDialog, {
+      width: '250px',
+      data: {location: value,closed:false}
+    });
+    // const dialogRef = this.dialog.open(EditLocationDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result && !result.closed){
+        let schedules = this.shitScheduleForm.get('schedules') as FormArray
+        schedules.controls[index].get('location').setValue(result.location)
+      }
+    });
+  }
 }
 
+
+
+
+
+
+@Component({
+  selector: 'edit-location-dialog',
+  templateUrl: 'edit-location-dialog.html'  
+})
+export class EditLocationDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<EditLocationDialog>,
+    @Inject(MAT_DIALOG_DATA) public data) {}
+
+  onNoClick(): void {
+    this.data.closed = true;
+    this.dialogRef.close(this.data);
+  }
+
+}
 
 @Component({
   selector: 'snack-bar-component-example-snack',
@@ -234,3 +288,5 @@ export class PizzaPartyComponent {
     alert('hi')
   }
  }
+
+

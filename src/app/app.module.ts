@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/home/home.component';
+import { EditLocationDialog, HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -18,6 +18,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MapDialogComponent } from './dialogs/map-dialog/map-dialog.component';
 import { DialogContentExampleDialog } from './dialogs/map-dialog/map-dialog.component';
 import { AgmCoreModule } from '@agm/core';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,10 @@ import { AgmCoreModule } from '@agm/core';
     HomeComponent,
     SignaturePadComponent,
     MapDialogComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    EditLocationDialog
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,6 +44,7 @@ import { AgmCoreModule } from '@agm/core';
     MatIconModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatInputModule,
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
