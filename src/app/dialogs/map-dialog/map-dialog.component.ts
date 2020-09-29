@@ -71,7 +71,7 @@ export class DialogContentExampleDialog implements AfterViewInit{
   getPlaceName(lon, lat)
   {
     var content = document.getElementById('popup-content');
-    fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + lon + '&lat=' + lat).then((response)=>{
+    fetch('https://nominatim.openstreetmap.org/reverse?format=json&lon=' + lon + '&lat=' + lat).then((response)=>{
     return response.json();
   }).then((json) => {
     console.log("location is:", json.display_name);
