@@ -451,11 +451,27 @@ button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent .ownP
   /* box-shadow: 3px 5px #0a0a0a; */
 }
 
+.ownPick {
+  background: transparent;
+}
+
 .disabledInput{
   pointer-events: none;
  }
 .locationeditField{
 display: flex;
+}
+.locationeditbutton{
+  outline: none;
+  background-color: transparent;
+}
+::ng-deep .cdk-overlay-pane{
+  width:650px!important
+}
+.locationArea{
+  cursor: pointer;
+  color: white;
+  font-style: italic;
 }
 .ownPoisitionRelative
 {

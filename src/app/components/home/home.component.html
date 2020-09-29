@@ -228,11 +228,11 @@
 
                   <div style="display:flex;" *ngIf="schedule.controls.location.value!=''" class="locationeditField">
                     <!-- <mat-label style="cursor: pointer;"(click)="openMapDialog(i)">{{schedule.controls.location.value}}</mat-label> -->
-                    <textarea formControlName="location" (click)="openMapDialog(i)" type="text"readonly  matInput></textarea>
+                    <textarea formControlName="location"  class="locationArea" (click)="openMapDialog(i)" type="text"readonly  matInput></textarea>
                     <!-- <div style="position:absolute; left:0; right:0; top:0; bottom:0;"></div> -->
 
-                    <button mat-icon-button matSuffix (click)="openEditDialog(i,schedule.controls.location.value)" >
-                    <mat-icon class="locationediticon">edit</mat-icon>
+                    <button mat-icon-button matSuffix class="locationeditbutton" (click)="openEditDialog(i,schedule.controls.location.value)" >
+                    <mat-icon class="locationediticon" style="font-size: 30px;">edit</mat-icon>
                     </button>
                   </div>
                   
@@ -243,7 +243,7 @@
                   
                   <button   mat-fab  *ngIf="schedule.controls.location.value==''" (click)="openMapDialog(i)"aria-label="Example icon button with a delete icon" class="location btn">
                     <mat-icon color="">place</mat-icon>
-                    <span class="bg-purple ownPick">Pick</span>
+                    <span class="ownPick">Pick</span>
                   </button>
                   
                   <!-- <app-map-dialog *ngIf="schedule.controls.location.value==''" (location)="addAddress($event,i)"></app-map-dialog> -->
@@ -391,7 +391,7 @@
           <div class="col-md-2">
             <form [formGroup]="signatureForm" novalidate>
               <div class="col s12 m3 input-field own-signature-field">
-                <h6 class="headingFinal">Other Signature</h6>
+                <h6 class="headingFinal ownHeading">Other Signature</h6>
                 <!-- <span><img src="sign.png" width="100"></span><br> -->
 
                 <div>
@@ -401,11 +401,11 @@
 
                 <div _ngcontent-vbg-c46="" class="form-group mt-2">
                   <label _ngcontent-vbg-c46="" class="label-class required ownHeading">Team Name </label>
-                  <input _ngcontent-vbg-c46="" [(ngModel)]="shiftInfoForm.controls.teamName.value" formControlName="teamName" type="text" name="Name"
+                  <input _ngcontent-vbg-c46="" disabled style="background-color: #bdbdbd!important;"[(ngModel)]="shiftInfoForm.controls.teamName.value" formControlName="teamName" type="text" name="Name"
                     placeholder="Team Name" autocomplete="on" required="" class="form-control"></div>
 
                 <div class="form-group mt-2">
-                  <label class="headingFinal required">Rank </label>
+                  <label class="headingFinal required ownHeading">Rank </label>
                   <select class="browser-default" formControlName="rank">
                     <option value="" disabled selected>Rank</option>
                     <option value="1">Option 1</option>
