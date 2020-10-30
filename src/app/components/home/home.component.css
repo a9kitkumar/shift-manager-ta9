@@ -1,4 +1,10 @@
- .signform {
+mat-progress-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.signform {
   text-transform: capitalize;
   padding: 8% 7% 0% 6%;
   height: 100vh;
@@ -67,7 +73,7 @@
   font-size: 14px;
   margin-right:5px;
  }
- 
+
  .endTime
  {
   font-weight: 500;
@@ -84,7 +90,7 @@
   width: 44px!important;
   border-bottom: 0!important;
   color: #000;
-  
+
 }
  .location{
   display: flex;
@@ -106,7 +112,7 @@
  }
 .ownDeleteBtn
 {
- 
+
   outline: none;
   color: white;
 
@@ -114,7 +120,7 @@
 }
 .ownAddImg
 {
-  
+
   background-color: #7375f8;
   position: fixed;
   bottom: 20px;
@@ -465,8 +471,14 @@ display: flex;
   outline: none;
   background-color: transparent;
 }
-::ng-deep .cdk-overlay-pane{
+/* ::ng-deep .cdk-overlay-pane{
   width:650px!important
+} */
+.shiftdate .shiftDateButton {
+      background: #6b52f8!important
+}
+.shiftdate .shiftDateButton:focus {
+      background: #6b52f8!important
 }
 .locationArea{
   cursor: pointer;
@@ -475,6 +487,8 @@ display: flex;
 }
 .ownPoisitionRelative
 {
+  margin-top: 0px!important;
+  margin-bottom: 0px!important;
   position: relative;
 }
 button.mat-focus-indicator.location.btn.mat-fab.mat-button-base.mat-accent:hover {
@@ -583,6 +597,7 @@ select {
   margin-top: 0px;
   margin-bottom: 0px;
   height: 75px;
+  min-height: 53px;
   border-radius: 5px;
   font-size: 14px;
   padding: 5px;
@@ -606,7 +621,12 @@ select {
   position: relative!important;
   height:57px
 }
-
+.locationSelectorBox{
+  display:flex
+}
+.locationSelectorBox button{
+  margin:5px
+}
 .fadeOnSwitch {
   -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1.5s; /* Firefox < 16 */
@@ -615,7 +635,12 @@ select {
        animation: fadein 1.5s;
 
 }
-
+::ng-deep [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+    background-color: #6b52f8;
+}
+::ng-deep [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+    border: 2px solid #6b52f8;
+}
 /* .animatebox {
   transition: visibility 0s, opacity 0.5s linear;
   background: #5FCF80!important;
